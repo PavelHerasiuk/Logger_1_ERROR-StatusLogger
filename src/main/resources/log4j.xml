@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" strict="true">
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d}{yellow} %highlight{%-5level}{FATAL=bg__red, ERROR=red, WARN=yellow, INFO=green} [%t] %C{2} (%F:%L) - %m%n"/>
+        </Console>
+
+        <File name="LOG" fileName="src/main/resources/log.log" append="true">
+            <PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/>
+        </File>
+
+        <File name="JsonLog" fileName="src/main/resources/JsonLog.json" append="true">
+            <JsonLayout complete="true" compact="false" includeTimeMillis="true">
+                <KeyValuePair key="myCustomField" value="myCustomValue"/>
+            </JsonLayout>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="by.com.logger" level="trace" additivity="true">
+            <AppenderRef ref="JsonLog"/>
+        </Logger>
+
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
